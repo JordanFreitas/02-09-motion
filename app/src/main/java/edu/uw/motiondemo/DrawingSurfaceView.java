@@ -60,7 +60,7 @@ public class DrawingSurfaceView extends SurfaceView implements SurfaceHolder.Cal
 
         //The Ball
         ball = new Ball(100,100,100);
-        ball.dx = 1;
+        //ball.dx = 1;
     }
 
 
@@ -70,6 +70,10 @@ public class DrawingSurfaceView extends SurfaceView implements SurfaceHolder.Cal
     public void update(){
 
         ball.cx += ball.dx; //move
+        ball.cy+= ball.dy;
+
+        ball.dx *= .95;
+        ball.dy *= .95;
 
         /* hit detection */
         if(ball.cx + ball.radius > viewWidth) { //left bound
@@ -82,9 +86,11 @@ public class DrawingSurfaceView extends SurfaceView implements SurfaceHolder.Cal
         }
         else if(ball.cy + ball.radius > viewHeight) { //bottom bound
             ball.cy = viewHeight - ball.radius;
+            ball.dy *= -1;
         }
         else if(ball.cy - ball.radius < 0) { //top bound
             ball.cy = ball.radius;
+            ball.dy *= -1;
         }
     }
 
